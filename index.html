@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<title>Die Hard</title>
+<style><!--
+#canvas { position: absolute; left: 0; top: 0; width: 480px; height: 480px; }
+#panel { position: absolute; left: 480px; width: 10em; height: 480px; }
+.param { margin: 0.5em; }
+.value { color: cyan; }
+--></style>
+<script src="https://d3js.org/d3.v4.min.js"></script>
+<script src="js/game.js"></script>
+<body bgcolor="black" text="white" link="cyan" onload="main();">
+<h1>Die Hard</h1>
+<div style="margin: 1em; position: relative; height:480px; " align=center>
+  <svg id="canvas" height="480" width="480" xmlns="http://www.w3.org/2000/svg" version="1.1"> <defs> <pattern id="dots" patternUnits="userSpaceOnUse" width="8" height="8"><rect x="0" y="0" width="1" height="1" stroke="none" fill="white" /> </pattern> </defs> </svg>
+  <div id="panel">
+    <div class=param>Bits
+      <div>
+	<button onclick="addDW(-1);">-</button>
+	<input id="f_dw" size="2" onInput="addDW(0);" />
+	<button onclick="addDW(+1);">+</button>
+      </div>
+    </div>
+    <div class=param>Registers
+      <div>
+	<button onclick="addReg(-1);">-</button>
+	<input id="f_reg" size="2" onInput="addReg(0);" />
+	<button onclick="addReg(+1);">+</button>
+      </div>
+    </div>
+    <div class=param>ALUs
+      <div>
+	<button onclick="addALU(-1);">-</button>
+	<input id="f_alu" size="2" onInput="addALU(0);" />
+	<button onclick="addALU(+1);">+</button>
+      </div>
+    </div>
+    <div class=param>Max. Clock
+      <div class=value id="f_clock">1MHz</div>
+    </div>
+    <div class=param>Power Cons.
+      <div class=value id="f_power">10W</div>
+    </div>
+    <div class=param>Unit Price
+      <div class=value id="f_price">$100</div>
+    </div>
+    <div>
+      <button onclick="rotateSelection();" style="height:4em;">Rotate</button>
+    </div>
+    <div>
+      <button onclick="resetEverything();" style="margin:2em;">Reset</button>
+    </div>
+  </div>
+</div>
+<ul>
+<li> <u>How To Play</u>: Drag and drop the components. Double click to rotate.<br>
+  You have to fit everything within the die. Also all the connectors have to be
+  wired properly. (Wiring is automatic.)
+<li> More bits = Bigger Register Unit, Control Unit and ALUs.
+<li> More registers = Bigger Register Unit and Control Unit.
+<li> More ALUs = Bigger Control Unit.
+<li> Longer wiring = Lower clock and more power-hungry.
+</ul> 
+<p>
+<u>Notice:</u>
+The constants are set roughly to the 1970's technology.
+They could be changed as the technology advances,
+and other kinds of components (Interrupt Controller or Cache)
+could be added.
+
+<div style="display:none;">
+  <audio id="add" src="assets/add.mp3" preload="auto"></audio>
+  <audio id="remove" src="assets/remove.mp3" preload="auto"></audio>
+</div>
+</body>
